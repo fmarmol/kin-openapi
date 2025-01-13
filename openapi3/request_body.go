@@ -13,7 +13,7 @@ type RequestBody struct {
 	Origin     *Origin        `json:"origin,omitempty" yaml:"origin,omitempty"`
 
 	Description string  `json:"description,omitempty" yaml:"description,omitempty"`
-	Required    bool    `json:"required,omitempty" yaml:"required,omitempty"`
+	Required    bool    `json:"required" yaml:"required"` // Force display required is false
 	Content     Content `json:"content" yaml:"content"`
 }
 
@@ -92,9 +92,7 @@ func (requestBody RequestBody) MarshalYAML() (any, error) {
 	if x := requestBody.Description; x != "" {
 		m["description"] = requestBody.Description
 	}
-	if x := requestBody.Required; x {
-		m["required"] = x
-	}
+	m["required"] = requestBody.Required
 	if x := requestBody.Content; true {
 		m["content"] = x
 	}
